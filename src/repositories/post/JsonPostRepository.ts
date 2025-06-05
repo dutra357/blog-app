@@ -6,9 +6,17 @@ import { readFile } from "fs/promises";
 const ROOT_DIR = process.cwd();
 const ROOT_FILE_POST_PATH = resolve(ROOT_DIR, 'src', 'db', 'seed', 'posts.json')
 
+const SIMULATE_DELAY = 5000;
+
 // Padão Repository
 // BOOK: Patterns of Enterprise Application Architecture
 export class JsonPostRepository implements PostRepository {
+
+    private async delay() {
+        await new Promise((resolve) => {
+            setTimeout(resolve, SIMULATE_DELAY);
+        });
+    }
 
     private async readFromDisk() {
         const file = await readFile(ROOT_FILE_POST_PATH, 'utf-8');
@@ -18,11 +26,15 @@ export class JsonPostRepository implements PostRepository {
     }
 
     async findAll(): Promise<PostModel[]> {
+        await this.delay();
+
         const posts = await this.readFromDisk();
         return posts;
     }
 
-        async findById(id: string): Promise<PostModel> {
+    async findById(id: string): Promise<PostModel> {
+        await this.delay();
+
         const posts = await this.findAll();
         const post = posts.find((post) => post.id === id);
 
