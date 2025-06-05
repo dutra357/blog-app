@@ -5,7 +5,11 @@ import { Suspense } from "react";
 export default async function Home() {
   
   return (
-    <div>
+    <div className='text-slate-900 
+    bg-slate-100 
+    min-h-screen 
+    dark:bg-slate-900 dark:text-slate-100'>
+
       <header>
         <h1 className='text-6x1 font-bold text-center py-8'>Blog App</h1>
       </header>
@@ -17,6 +21,7 @@ export default async function Home() {
       <footer>
         <h2 className='text-6x1 font-bold text-center py-8'>Meu footer</h2>
       </footer>
+
     </div>
   );
 }
