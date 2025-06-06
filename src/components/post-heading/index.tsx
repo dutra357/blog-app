@@ -9,15 +9,19 @@ type PostheadingProps = {
 
 export function PostHeading({ children, url, as:Tag = 'h2'}: PostheadingProps) {
     const headingClassesMap = {
-        h1: 'text-4xl/tight font-extrabold sm:text-5xl',
-        h2: 'text-3xl/tight font-extrabold sm:text-4xl',
-        h3: 'text-2xl/tight font-extrabold sm:text-3xl',
+        h1: 'text-4xl/tight font-bold sm:text-5xl',
+        h2: 'text-3xl/tight font-bold sm:text-4xl',
+        h3: 'text-2xl/tight font-bold sm:text-3xl',
     }
     
     return (
         <Tag className={headingClassesMap[Tag]}>
 
-            <Link href={url}>{children}</Link>
+            <Link
+            className='hover:text-blue-700 transition'
+            href={url}
+            >{children}</Link>
+            
         </Tag>
     );
 }
