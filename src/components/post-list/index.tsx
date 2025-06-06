@@ -1,6 +1,7 @@
 import { postRepository } from "@/repositories/post";
 import { PostCoverImage } from "../post-cover-img";
 import { PostHeading } from "../post-heading";
+import { formatDateTime } from "@/utils/dateTimeFormater";
 
 
 export async function PostList() {
@@ -30,7 +31,7 @@ export async function PostList() {
                             <time
                                 className='text-slate-600 text-sm/tight'
                                 dateTime={post.createdAt}>
-                                {post.createdAt}
+                                {formatDateTime(post.createdAt)}
                             </time>
 
                             <PostHeading url={postLink} as='h3'>
