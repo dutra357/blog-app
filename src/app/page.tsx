@@ -1,9 +1,9 @@
 import { Container } from "@/components/container";
 import { Header } from "@/components/header";
+import { PostCoverImage } from "@/components/post-cover-img";
+import { PostHeading } from "@/components/post-heading";
 import { PostList } from "@/components/post-list";
 import { SpinLoader } from "@/components/spin-loader";
-import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -14,23 +14,22 @@ export default async function Home() {
 
       <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>
 
-        <Link href="#" className='w-full h-full overflow-hidden rounded-xl'>
-          
-          <Image className='object-cover object-center w-full h-full group-hover:scale-105 transition'
-            priority
-            src='/images/image.png'
-            width={1200}
-            height={720}
-            alt='Título do post' />
-
-        </Link>
+        <PostCoverImage
+          linkProps={{ href: '#' }}
+          imageProps={{
+            priority: true,
+            src: '/images/image.png',
+            alt: 'Título do post',
+            width: 1200,
+            height: 720
+          }} />
 
         <div className='flex flex-col gap-2'>
           <time className='text-slate-600 text-sm/tight' dateTime='2025-04-21'>21 de abril de 2025</time>
 
-          <h1 className='text-2xl/tight font-extrabold sm:text-4xl'>
-            <Link href='#'>Meu link</Link>
-          </h1>
+          <PostHeading url='#' as='h3'>
+            meu link
+          </PostHeading>
 
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
