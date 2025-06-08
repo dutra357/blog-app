@@ -1,7 +1,6 @@
 import { postRepository } from "@/repositories/post";
 import { PostCoverImage } from "../post-cover-img";
-import { PostHeading } from "../post-heading";
-import { formatDateTime } from "@/utils/dateTimeFormater";
+import { PostSummary } from "../post-summary";
 
 
 export async function PostList() {
@@ -13,10 +12,7 @@ export async function PostList() {
 
                 const postLink = `/post/${post.slug}`;
                 return (
-                    <div
-                        className='group flex flex-col gap-4'
-                        key={post.id}>
-
+                    <div className='group flex flex-col gap-4' key={post.id}>
                         <PostCoverImage
                             linkProps={{ href: postLink }}
                             imageProps={{
@@ -27,21 +23,13 @@ export async function PostList() {
                                 alt: post.title,
                             }} />
 
-                        <div className='flex flex-col gap-2'>
-                            <time
-                                className='text-slate-600 text-sm/tight'
-                                dateTime={post.createdAt}>
-                                {formatDateTime(post.createdAt)}
-                            </time>
 
-                            <PostHeading url={postLink} as='h3'>
-                                {post.title}
-                            </PostHeading>
-
-                            <p>
-                                {post.excerpt}
-                            </p>
-                        </div>
+                        <PostSummary
+                            postLink={postLink}
+                            createdAt={post.createdAt}
+                            title={post.title}
+                            excerpt={post.excerpt}
+                            postHeading='h3' />
                     </div>
                 )
             })}
