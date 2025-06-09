@@ -1,28 +1,29 @@
+import { SinglePost } from "@/components/post-content";
+import { SpinLoader } from "@/components/spin-loader";
 import { findBySlugCached } from "@/lib/post-lib/queries";
-import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import { Suspense } from "react";
 
 type PostSlugPageProps = {
     params: { slug: string };
 }
 
+export async function generateMetadata({ params }: PostSlugPageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const post = await findBySlugCached(slug);
+
+    return {
+        title: post.title,
+        description: post.excerpt
+    };
+}
+
 export default async function PostSlugPage({ params }: PostSlugPageProps) {
-
-    const { slug } = params;
+    const { slug } = await params;
     
-    const post = await findBySlugCached(slug).catch((error) => {
-        console.error('Error fetching post:', error);
-        return null;
-    });
-    
-
-    if (!post) {
-        console.log('Post not found for this slug.');
-        notFound();
-    }
-
     return (
-        <div>
-            <p>{post.content}</p>
-        </div>
+        <Suspense fallback={<SpinLoader className='min-h-20 mb-16' />}>
+            <SinglePost slug={slug} />
+        </Suspense>
     );
 }

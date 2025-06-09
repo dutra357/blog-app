@@ -8,10 +8,11 @@ export default async function Home() {
   return (
 
     <>
-      <PostDestaque />
+      <Suspense fallback={<SpinLoader className='min-h-20 mb-16'/>}>
 
-      <Suspense fallback={<SpinLoader />}>
+        <PostDestaque />
         <PostList />
+        
       </Suspense>
     </>
 

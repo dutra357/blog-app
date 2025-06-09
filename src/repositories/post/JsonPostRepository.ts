@@ -6,17 +6,17 @@ import { readFile } from "fs/promises";
 const ROOT_DIR = process.cwd();
 const ROOT_FILE_POST_PATH = resolve(ROOT_DIR, 'src', 'db', 'seed', 'posts.json')
 
-//const SIMULATE_DELAY = 5000;
+const SIMULATE_DELAY = 0;
 
 // Padão Repository
 // BOOK: Patterns of Enterprise Application Architecture
 export class JsonPostRepository implements PostRepository {
 
-    // private async delay() {
-    //     await new Promise((resolve) => {
-    //         setTimeout(resolve, SIMULATE_DELAY);
-    //     });
-    // }
+    private async delay() {
+        await new Promise((resolve) => {
+            setTimeout(resolve, SIMULATE_DELAY);
+        });
+    }
 
     private async readFromDisk() {
         const file = await readFile(ROOT_FILE_POST_PATH, 'utf-8');
@@ -26,15 +26,13 @@ export class JsonPostRepository implements PostRepository {
     }
 
     async findAllPublished(): Promise<PostModel[]> {
-        //await this.delay();
+        await this.delay();
 
         const posts = await this.readFromDisk();
         return posts.filter((post: { published: boolean; }) => post.published);
     }
 
     async findById(id: string): Promise<PostModel> {
-        //await this.delay();
-
         const posts = await this.findAllPublished();
         const post = posts.find((post) => post.id === id);
 
@@ -46,8 +44,6 @@ export class JsonPostRepository implements PostRepository {
     }
 
     async findBySlug(slug: string): Promise<PostModel> {
-        //await this.delay();
-
         const posts = await this.findAllPublished();
         const post = posts.find((post) => post.slug === slug);
 
