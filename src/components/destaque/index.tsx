@@ -1,10 +1,12 @@
 import { PostCoverImage } from "../post-cover-img";
-import { PostHeading } from "../post-heading";
 import { PostSummary } from "../post-summary";
+import { findAllPublishedPosts } from "@/lib/post-lib/queries";
 
-export function PostDestaque() {
-    const slug = 'meu-post-link';
-    const postLink = slug;
+export async function PostDestaque() {
+    const posts = await findAllPublishedPosts();
+    const firstPost = posts[0];
+    const postLink = `/post/${firstPost.slug}`;
+
     return (
 
         <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>
@@ -13,8 +15,8 @@ export function PostDestaque() {
                 linkProps={{ href: postLink }}
                 imageProps={{
                     priority: true,
-                    src: '/images/image.png',
-                    alt: 'Título do post',
+                    src: firstPost.coverImageUrl,
+                    alt: firstPost.title,
                     width: 1200,
                     height: 720
                 }} />
@@ -22,9 +24,9 @@ export function PostDestaque() {
                 <PostSummary
                 postLink={postLink}
                 postHeading='h3'
-                createdAt='2025-04-21'
-                excerpt='O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.'
-                title='Rotina matinal de pessoas altamente eficazes' />
+                createdAt={firstPost.createdAt}
+                excerpt={firstPost.excerpt}
+                title={firstPost.title} />
 
         </section>
     );
