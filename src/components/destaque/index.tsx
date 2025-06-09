@@ -1,9 +1,9 @@
 import { PostCoverImage } from "../post-cover-img";
 import { PostSummary } from "../post-summary";
-import { findAllPublishedPosts } from "@/lib/post-lib/queries";
+import { findAllPublishedPostsCached } from "@/lib/post-lib/queries";
 
 export async function PostDestaque() {
-    const posts = await findAllPublishedPosts();
+    const posts = await findAllPublishedPostsCached();
     const firstPost = posts[0];
     const postLink = `/post/${firstPost.slug}`;
 

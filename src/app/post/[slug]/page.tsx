@@ -1,14 +1,28 @@
+import { findBySlugCached } from "@/lib/post-lib/queries";
+import { notFound } from "next/navigation";
+
 type PostSlugPageProps = {
     params: { slug: string };
 }
 
-export default function PostSlugPage({ params }: PostSlugPageProps) {
+export default async function PostSlugPage({ params }: PostSlugPageProps) {
 
     const { slug } = params;
+    
+    const post = await findBySlugCached(slug).catch((error) => {
+        console.error('Error fetching post:', error);
+        return null;
+    });
+    
+
+    if (!post) {
+        console.log('Post not found for this slug.');
+        notFound();
+    }
 
     return (
-        <h1 className='text-7xl font-bold'>
-            Minha rota dinamica: {slug}
-        </h1>
+        <div>
+            <p>{post.content}</p>
+        </div>
     );
 }
