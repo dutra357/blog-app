@@ -29,7 +29,9 @@ export function SafeMarkDown({ markdown }: SafeMarkDown) {
                         </div>
                     )},
                 }} >
+
                 {markdown}
+                
             </ReactMarkdown>
         </div>
 
