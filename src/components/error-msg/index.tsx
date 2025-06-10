@@ -1,3 +1,5 @@
+'user client'
+
 type DisplayErrorMsgProps = {
     contentTitle: string,
     content: React.ReactNode

@@ -1,5 +1,6 @@
 'use client';
 
+//ErroBounderie: captura erros não tratados, podendo ser por rota ou na raiz
 import DisplayErrorMsg from "@/components/error-msg";
 import { useEffect } from "react";
 
@@ -9,7 +10,7 @@ type ErrorPageProps = {
 
 export default function RootErrorPage({error}:ErrorPageProps ) {
     useEffect(() => {
-        
+    
     }, [error]);
 
   return (
