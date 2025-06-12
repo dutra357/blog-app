@@ -1,8 +1,8 @@
 import { PostModel } from "@/models/post/PostModel";
 
 export interface DrizzleRepository {
-    findAllPublic(): Promise<PostModel[]>;
-    findBySlugPublic(slug: string): Promise<PostModel>;
+    findAllPublished(): Promise<PostModel[]>;
+    findBySlug(slug: string): Promise<PostModel>;
 
     //Para área administrativa
     findAll(): Promise<PostModel[]>;
