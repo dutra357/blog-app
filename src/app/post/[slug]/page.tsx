@@ -5,8 +5,8 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 type PostSlugPageProps = {
-    params: { slug: string };
-}
+  params: Promise<{ slug: string }>;
+};
 
 export async function generateMetadata({ params }: PostSlugPageProps): Promise<Metadata> {
     const { slug } = await params;
