@@ -1,4 +1,4 @@
-import { JsonPostRepository } from "@/repositories/post/JsonPostRepository";
+import { JsonPostRepository } from "@/repositories/post/json-mock/JsonPostRepository";
 import { drizzleDb } from ".";
 import { postsTable } from "./schema";
 
